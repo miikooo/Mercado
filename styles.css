@@ -1,0 +1,247 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Coloca o conteúdo superior no topo */
+    height: 100vh;
+    margin: 0;
+    background-color: #f9f9f9;
+    overflow: hidden; /* Impede rolagem na página inteira */
+}
+
+#game {
+    text-align: center;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-height: 100vh; /* Limita a altura máxima do jogo para 90% da altura da tela */
+    overflow-y: auto; /* Permite rolagem vertical apenas na área de jogo */
+    width: 100%;
+    margin-top: 20px; /* Espaçamento para a área superior do cabeçalho fixo */
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#inputs-apelidos {
+    margin: 10px 0;
+}
+
+#inputs-apelidos input {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: calc(100% - 24px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#navegacao-jogadores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#navegacao-jogadores button {
+    background-color: #ff7f00; 
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 50%;
+}
+
+#navegacao-jogadores button:hover {
+    background-color: #e67e00; 
+}
+
+#jogador-atual {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+#sacolas, #cartoes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.sacola, .cartao {
+    border: 2px solid #333;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: transform 0.3s, background-color 0.3s;
+    width: 120px; /* Largura das sacolas e cartões */
+    height: 120px; /* Altura das sacolas e cartões */
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.cartao {
+    background-image: url('img/traseira.png'); /* Parte de trás da carta */
+    background-size: cover;
+    background-position: center;
+    width: 200px;
+    height: 130px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s, background-color 0.3s, background-image 0.3s;
+}
+
+.cartao-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+}
+
+.cartao.revelado {
+    background-image: none; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+    background-color: #ffebcc;  
+}
+
+.cartao-conteudo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    perspective: 1000px;
+}
+
+.cartao-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    object-fit: cover;
+}
+
+.parte-traseira {
+    background-color: #f1f1f1;
+    transform: rotateY(0deg);
+}
+
+.fruta-imagem {
+    transform: rotateY(180deg);
+    visibility: hidden;
+}
+
+.cartao.revelado .parte-traseira {
+    transform: rotateY(180deg);
+}
+
+.cartao.revelado .fruta-imagem {
+    visibility: visible;
+    transform: rotateY(0deg);
+}
+
+.sacola:hover, .cartao:hover {
+    transform: scale(1.05);
+}
+
+.sacola {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    text-align: center;
+    border-color: #ff7f00;
+}
+
+.cesta-conteudo {
+    border-top: 2px solid #ff7f00;
+    margin-top: 10px;
+    padding-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fruta {
+    display: inline-block;
+    margin: 2px;
+    background: #ff7f00;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff7f00;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e67e00;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-conteudo {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.fechar {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.fechar:hover,
+.fechar:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
